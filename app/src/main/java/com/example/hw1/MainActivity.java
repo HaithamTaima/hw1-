@@ -10,15 +10,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-    double unm=0,unm_sum=0;
-    double un ;
+    double sum=0;
+    int count =0 ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setContentView(R.layout.activity_main);
-        EditText et_num= findViewById(R.id.main_unm);
+        EditText et_salare= findViewById(R.id.main_unm);
         Button btn_nextone= findViewById(R.id.main_nextone);
         Button btn_ending= findViewById(R.id.main_ending);
         TextView tv_result= findViewById(R.id.main_result );
@@ -26,17 +25,25 @@ public class MainActivity extends AppCompatActivity {
         btn_nextone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            int c = Integer.parseInt(et_num.getText().toString());
-            unm +=c;
-            unm_sum +=1;
-            un= unm/unm_sum;
-            et_num.setText("");
+                if (!et_salare.getText().toString().isEmpty()){
+
+
+            double salare = Double.parseDouble(et_salare.getText().toString());
+            //sum =sum+salare
+             sum += salare ;
+             et_salare.setText("");
+             count++;
+             Toast.makeText(getBaseContext(),sum + "",Toast.LENGTH_LONG).show();
+             Toast.makeText(getBaseContext(),count + "",Toast.LENGTH_LONG).show();
+            }
 
             btn_ending.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(MainActivity.this,"The calculation was done",Toast.LENGTH_SHORT).show();
-                    tv_result.setText(unm/unm_sum +"");
+                    if (count != 0 ){
+                        tv_result.setText((sum/count) +"");
+                    }
+
                 }
             });
             }
